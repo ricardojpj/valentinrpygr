@@ -2,101 +2,69 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>¿Quieres ser mi San Valentín?</title>
+  <title>Para ti 🤍</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      height: 100vh;
+      background: black;
+      font-family: Arial, sans-serif;
       overflow: hidden;
+      color: white;
+    }
+
+    .scene {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: white;
       text-align: center;
+      padding: 20px;
+    }
+
+    .scene.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    img {
+      max-width: 85%;
+      max-height: 60%;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255,255,255,0.3);
+      animation: zoomSlow 20s linear;
     }
 
     h1 {
-      font-size: 3em;
-      margin: 10px 0;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    p {
-      font-size: 1.3em;
-      margin-bottom: 15px;
-      animation: fadeIn 3s ease-in-out;
-    }
-
-    input[type="file"] {
-      margin: 15px 0;
-    }
-
-    .buttons {
-      margin-top: 15px;
-    }
-
-    button {
-      padding: 12px 30px;
-      font-size: 1.2em;
-      border: none;
-      border-radius: 30px;
-      margin: 10px;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    button:hover {
-      transform: scale(1.1);
-    }
-
-    .yes {
-      background: #fff;
-      color: #ff4f81;
-    }
-
-    .no {
-      background: #ff4f81;
-      color: white;
-    }
-
-    .message {
-      font-size: 1.8em;
+      font-size: 1.4em;
       margin-top: 20px;
-      animation: fadeIn 1s ease-in-out;
+      line-height: 1.4;
+      animation: fadeUp 3s ease;
     }
 
-    .gallery {
+    video {
       position: absolute;
-      width: 100%;
-      height: 100%;
       top: 0;
       left: 0;
-      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+      z-index: -1;
     }
 
-    .photo {
-      position: absolute;
-      width: 120px;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      animation: float 10s linear infinite;
+    @keyframes zoomSlow {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
     }
 
-    @keyframes float {
-      from {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(-150px) rotate(360deg);
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadeIn {
+    @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
@@ -104,56 +72,38 @@
 </head>
 <body>
 
-  <h1>💖 Amor 💖</h1>
-  <p>
-    Cada momento contigo es mi parte favorita del día.<br>
-    Por eso hoy quiero preguntarte algo muy importante…
-  </p>
+  <!-- ESCENA 1 -->
+  <div class="scene active" id="scene1">
+    <video autoplay muted loop playsinline>
+      <source src="song1.mp4" type="video/mp4">
+    </video>
 
-  <h1>¿Quieres ser mi San Valentín? 💌</h1>
-
-  <div class="buttons">
-    <button class="yes" onclick="answerYes()">Sí 💖</button>
-    <button class="no" onclick="answerNo()">No 🙃</button>
+    <img src="img1.jpg" alt="Recuerdo 1">
+    <h1>
+      Lamento mucho lo de tu papi.<br>
+      Sé que es doloroso y que hay días donde el corazón pesa más de lo normal.<br>
+      Quiero que sepas que estoy contigo y no estás sola 🤍
+    </h1>
   </div>
 
-  <div id="result" class="message"></div>
+  <!-- ESCENA 2 -->
+  <div class="scene" id="scene2">
+    <video autoplay muted loop playsinline>
+      <source src="song2.mp4" type="video/mp4">
+    </video>
 
-  <input type="file" id="imageInput" accept="image/*" multiple>
-  <button class="yes" onclick="addImages()">Agregar recuerdos 📸</button>
-
-  <div class="gallery" id="gallery"></div>
+    <img src="img2.jpg" alt="Recuerdo 2">
+    <h1>
+      Con todo mi cariño y respeto…<br><br>
+      ¿Quieres ser mi San Valentín? 💖
+    </h1>
+  </div>
 
   <script>
-    function answerYes() {
-      document.getElementById('result').innerHTML =
-        "💘 ¡Sabía que dirías que sí! 💘<br>Te amo y prometo hacer de este San Valentín algo inolvidable 🥰";
-    }
-
-    function answerNo() {
-      document.getElementById('result').innerHTML =
-        "❌ Respuesta incorrecta 😅<br>Inténtalo otra vez… la correcta es SÍ 💖";
-    }
-
-    function addImages() {
-      const input = document.getElementById('imageInput');
-      const gallery = document.getElementById('gallery');
-
-      Array.from(input.files).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const img = document.createElement('img');
-          img.src = e.target.result;
-          img.className = 'photo';
-          img.style.left = Math.random() * 80 + 'vw';
-          img.style.animationDuration = (8 + Math.random() * 6) + 's';
-          gallery.appendChild(img);
-        };
-        reader.readAsDataURL(file);
-      });
-
-      input.value = '';
-    }
+    setTimeout(() => {
+      document.getElementById("scene1").classList.remove("active");
+      document.getElementById("scene2").classList.add("active");
+    }, 20000); // 20 segundos
   </script>
 
 </body>
