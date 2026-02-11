@@ -1,241 +1,299 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Para ti 🤍</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ti 🤍</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-      color: white;
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
-      /* Fondo romántico sobrio */
-      background: linear-gradient(
-        135deg,
-        #2b1a1f,
-        #3a1f2b,
-        #1e1e26
-      );
-    }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
 
-    /* Overlay MUY suave */
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.25);
-      z-index: 0;
-    }
+body{
+  font-family:'Playfair Display', serif;
+  background: radial-gradient(circle at center, #3b1f2b, #141218);
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  animation:fadeBody 2s ease forwards;
+}
 
-    .scene {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 2s ease-in-out;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
-      z-index: 2;
-    }
+@keyframes fadeBody{
+  from{opacity:0;}
+  to{opacity:1;}
+}
 
-    .scene.active {
-      opacity: 1;
-    }
+/* Fondo partículas suaves */
+body::before{
+  content:"";
+  position:fixed;
+  width:200%;
+  height:200%;
+  background:url("https://www.transparenttextures.com/patterns/stardust.png");
+  opacity:0.07;
+  animation:moveBg 90s linear infinite;
+}
+@keyframes moveBg{
+  from{transform:translate(0,0);}
+  to{transform:translate(-600px,-600px);}
+}
 
-    /* VIDEO DE FONDO CORREGIDO */
-    video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+.book{
+  width:95%;
+  max-width:750px;
+  height:85vh;
+  backdrop-filter:blur(20px);
+  background:rgba(255,255,255,0.06);
+  border-radius:25px;
+  padding:40px;
+  box-shadow:0 0 80px rgba(0,0,0,0.9);
+  position:relative;
+  overflow:hidden;
+  perspective:1200px;
+}
 
-      /* CLAVE para que no se vea negro */
-      filter: brightness(0.6) contrast(1.1);
-      opacity: 0.6;
+.page{
+  position:absolute;
+  width:100%;
+  height:100%;
+  opacity:0;
+  transform:rotateY(20deg);
+  transition:all 1s ease;
+}
 
-      z-index: 1;
-    }
+.page.active{
+  opacity:1;
+  transform:rotateY(0deg);
+}
 
-    img.main {
-      max-width: 80%;
-      max-height: 55%;
-      border-radius: 20px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.6);
-      animation: zoomSlow 20s linear;
-      z-index: 3;
-    }
+h1{
+  margin-bottom:15px;
+}
 
-    h1 {
-      font-size: 1.4em;
-      line-height: 1.4;
-      margin-top: 20px;
-      animation: fadeUp 2s ease;
-      z-index: 3;
-    }
+.name{
+  font-family:'Great Vibes', cursive;
+  font-size:2em;
+  color:#f8c6d8;
+  animation:pulseName 2s infinite;
+}
+@keyframes pulseName{
+  0%{opacity:0.7;}
+  50%{opacity:1;}
+  100%{opacity:0.7;}
+}
 
-    .buttons {
-      margin-top: 20px;
-      z-index: 3;
-    }
+p{
+  line-height:1.7;
+  margin-top:15px;
+  opacity:0;
+  animation:fadeText 2s forwards;
+  animation-delay:1s;
+}
+@keyframes fadeText{to{opacity:1;}}
 
-    button {
-      padding: 12px 32px;
-      font-size: 1.1em;
-      border: none;
-      border-radius: 30px;
-      margin: 10px;
-      cursor: pointer;
-    }
+img{
+  width:100%;
+  border-radius:15px;
+  margin:20px 0;
+  box-shadow:0 0 40px rgba(0,0,0,0.6);
+}
 
-    .yes {
-      background: #ffffff;
-      color: #8b2d40;
-    }
+.nav-container{
+  position:absolute;
+  bottom:20px;
+  width:100%;
+  text-align:center;
+}
 
-    .no {
-      background: #8b2d40;
-      color: white;
-    }
+button{
+  padding:10px 30px;
+  margin:8px;
+  border-radius:30px;
+  border:none;
+  cursor:pointer;
+  transition:0.3s;
+  font-family:'Playfair Display';
+}
 
-    #result {
-      margin-top: 20px;
-      font-size: 1.3em;
-      animation: fadeUp 1s ease;
-      z-index: 3;
-    }
+.nav{
+  background:white;
+  color:#7a2e40;
+}
+.nav:hover{
+  background:#7a2e40;
+  color:white;
+}
 
-    /* CORAZÓN */
-    .heart-container {
-      position: relative;
-      width: 220px;
-      height: 200px;
-      margin: 25px auto 0;
-    }
+.no{
+  background:#7a2e40;
+  color:white;
+}
 
-    .heart {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: #c73b5c;
-      transform: rotate(-45deg);
-      animation: pulse 1.5s infinite;
-      border-radius: 20px;
-    }
+.countdown{
+  margin-top:15px;
+  font-size:0.9em;
+  opacity:0.8;
+}
 
-    .heart::before,
-    .heart::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: #c73b5c;
-      border-radius: 50%;
-    }
+/* Corazón final */
+.heart-container{
+  position:relative;
+  display:inline-block;
+  margin-top:30px;
+}
 
-    .heart::before {
-      top: -50%;
-      left: 0;
-    }
+.heart{
+  position:absolute;
+  top:-20px;
+  left:-20px;
+  width:290px;
+  animation:pulse 1.5s infinite;
+  z-index:1;
+}
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.08);}
+  100%{transform:scale(1);}
+}
 
-    .heart::after {
-      left: 50%;
-      top: 0;
-    }
-
-    .heart img {
-      position: absolute;
-      width: 70%;
-      height: 70%;
-      object-fit: cover;
-      border-radius: 15px;
-      top: 15%;
-      left: 15%;
-      transform: rotate(45deg);
-      z-index: 2;
-    }
-
-    @keyframes zoomSlow {
-      from { transform: scale(1); }
-      to { transform: scale(1.1); }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-      0% { transform: rotate(-45deg) scale(1); }
-      50% { transform: rotate(-45deg) scale(1.1); }
-      100% { transform: rotate(-45deg) scale(1); }
-    }
-  </style>
+.result{
+  margin-top:20px;
+}
+</style>
 </head>
 <body>
 
-  <div class="overlay"></div>
+<div class="book">
 
-  <!-- ESCENA 1 -->
-  <div class="scene active" id="scene1">
-    <video autoplay muted loop playsinline>
-      <source src="song1.mp4" type="video/mp4">
-    </video>
+<!-- Página 1 -->
+<div class="page active">
+  <h1>Para <span class="name">[SU NOMBRE]</span></h1>
+  <img src="padre.jpg">
+  <p>
+    Hoy honramos a tu papá.  
+    Él soñó con verte doctora…  
+    y hoy eres exactamente eso.  
+    Estoy seguro de que donde esté, sonríe orgulloso.
+  </p>
+</div>
 
-    <img src="img1.jpg" class="main">
+<!-- Página 2 -->
+<div class="page">
+  <h1>Tu camino</h1>
+  <img src="momento2.jpg">
+  <p>
+    Aunque no hayas ido a Barcelona,  
+    tu grandeza no depende de una ciudad.  
+    Depende de tu corazón…  
+    y ese corazón es extraordinario.
+  </p>
+</div>
 
-    <h1>
-      Lamento mucho lo de tu papi.<br>
-      Sé que es doloroso y que hay días en los que el corazón pesa más de lo normal.<br>
-      Quiero que sepas que no estás sola 🤍
-    </h1>
-  </div>
+<!-- Página 3 -->
+<div class="page">
+  <h1>Una última pregunta…</h1>
+  <p style="font-family:'Great Vibes'; font-size:2em;">
+    ¿Quieres ser mi San Valentín? 💖
+  </p>
 
-  <!-- ESCENA 2 -->
-  <div class="scene" id="scene2">
-    <video autoplay muted loop playsinline>
-      <source src="song2.mp4" type="video/mp4">
-    </video>
+  <button class="nav" onclick="yes()">Sí 🤍</button>
+  <button class="no" onclick="no()">No 🙃</button>
 
-    <img src="img2.jpg" class="main">
+  <div class="countdown" id="countdown"></div>
+  <div class="result" id="result"></div>
+</div>
 
-    <h1>¿Quieres ser mi San Valentín? 💖</h1>
+<div class="nav-container">
+  <button class="nav" onclick="prev()">Atrás</button>
+  <button class="nav" onclick="next()">Siguiente</button>
+</div>
 
-    <div class="buttons">
-      <button class="yes" onclick="answerYes()">Sí 💖</button>
-      <button class="no" onclick="answerNo()">No 🙃</button>
-    </div>
+</div>
 
-    <div id="result"></div>
-  </div>
+<audio id="music1" src="music1.mp3" loop></audio>
+<audio id="music2" src="music2.mp3" loop></audio>
 
-  <script>
-    setTimeout(() => {
-      document.getElementById("scene1").classList.remove("active");
-      document.getElementById("scene2").classList.add("active");
-    }, 20000);
+<script>
+const pages=document.querySelectorAll(".page");
+let current=0;
+const m1=document.getElementById("music1");
+const m2=document.getElementById("music2");
 
-    function answerNo() {
-      document.getElementById("result").innerHTML =
-        "❌ Escogiste la respuesta incorrecta 😅<br>Inténtalo otra vez 💕";
-    }
+function fadeInAudio(audio){
+  audio.volume=0;
+  audio.play();
+  let vol=0;
+  let fade=setInterval(()=>{
+    if(vol<1){
+      vol+=0.05;
+      audio.volume=vol;
+    }else clearInterval(fade);
+  },200);
+}
 
-    function answerYes() {
-      document.getElementById("result").innerHTML = `
-        <h1>💘 Sabía que dirías que sí 💘</h1>
-        <div class="heart-container">
-          <div class="heart">
-            <img src="heart.jpg">
-          </div>
-        </div>
-      `;
-    }
-  </script>
+function showPage(i){
+  pages.forEach(p=>p.classList.remove("active"));
+  pages[i].classList.add("active");
+
+  if(i===0){
+    m2.pause();
+    fadeInAudio(m1);
+  }else{
+    m1.pause();
+    fadeInAudio(m2);
+  }
+}
+
+function next(){
+  if(current<pages.length-1){
+    current++;
+    showPage(current);
+  }
+}
+function prev(){
+  if(current>0){
+    current--;
+    showPage(current);
+  }
+}
+
+function no(){
+  document.getElementById("result").innerHTML=
+  "❌ Esa no es la respuesta correcta… tu corazón sabe cuál es 🤍";
+}
+
+function yes(){
+  document.getElementById("result").innerHTML=
+  `<div class="heart-container">
+     <svg class="heart" viewBox="0 0 32 29.6">
+       <path fill="#c73b5c" d="M23.6,0c-3.4,0-6.3,2.7-7.6,4.9C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4
+       c0,9.4,16,21.2,16,21.2s16-11.8,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+     </svg>
+     <img src="final.jpg" width="250">
+   </div>
+   <p style="font-family:'Great Vibes'; font-size:1.8em;">
+   Sabía que dirías que sí 💘
+   </p>`;
+}
+
+/* Cuenta regresiva a 14 Feb */
+function updateCountdown(){
+  const target=new Date("February 14, 2026 00:00:00");
+  const now=new Date();
+  const diff=target-now;
+
+  const days=Math.floor(diff/(1000*60*60*24));
+  document.getElementById("countdown").innerText=
+  "Faltan "+days+" días para San Valentín 🤍";
+}
+updateCountdown();
+
+showPage(0);
+</script>
 
 </body>
 </html>
