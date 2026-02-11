@@ -3,252 +3,199 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Para Ti 🤍</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<!-- 🔥 Anti-cache -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
 body{
-  font-family:'Playfair Display', serif;
-  background: radial-gradient(circle at top, #3b1f2b, #141218);
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#2b1a1f,#3a1f2b,#1e1e26);
   color:white;
+  overflow-x:hidden;
 }
 
-/* Contenedor libro */
-.book{
-  width:100%;
-  max-width:800px;
-  background:rgba(255,255,255,0.06);
-  backdrop-filter:blur(15px);
-  border-radius:20px;
-  padding:30px;
-  box-shadow:0 0 60px rgba(0,0,0,0.7);
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
 }
 
-/* Página */
-.page{
+.section{
   display:none;
-  animation:fadeIn 0.8s ease forwards;
+  animation:fade 0.6s ease-in-out;
 }
 
-.page.active{
+.section.active{
   display:block;
 }
 
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(15px);}
+@keyframes fade{
+  from{opacity:0; transform:translateY(10px);}
   to{opacity:1; transform:translateY(0);}
 }
 
 h1{
-  margin-bottom:15px;
-  font-size:clamp(1.3rem, 4vw, 1.8rem);
-}
-
-.name{
-  font-family:'Great Vibes', cursive;
-  font-size:clamp(1.8rem, 6vw, 2.5rem);
-  color:#f6c1d6;
+  font-size:24px;
+  text-align:center;
 }
 
 p{
-  margin-top:15px;
-  line-height:1.6;
-  font-size:clamp(0.95rem, 2.5vw, 1.05rem);
+  font-size:18px;
+  line-height:1.7;
+  text-align:center;
 }
 
 img{
   width:100%;
-  max-height:300px;
+  max-height:400px;
   object-fit:cover;
-  border-radius:15px;
-  margin:15px 0;
-  box-shadow:0 0 30px rgba(0,0,0,0.6);
+  border-radius:18px;
+  margin:20px 0;
 }
 
-/* Botones */
 .buttons{
-  margin-top:20px;
   text-align:center;
+  margin-top:25px;
 }
 
 button{
-  padding:10px 25px;
-  margin:8px;
+  padding:12px 28px;
   border:none;
-  border-radius:25px;
+  border-radius:30px;
+  font-size:16px;
+  margin:8px;
   cursor:pointer;
-  font-family:'Playfair Display';
-  font-size:0.9rem;
   transition:0.3s;
 }
 
-.nav{
+.primary{
   background:white;
-  color:#7a2e40;
+  color:black;
 }
 
-.nav:hover{
+.primary:hover{
+  transform:scale(1.05);
+}
+
+.secondary{
   background:#7a2e40;
   color:white;
 }
 
-.no{
-  background:#7a2e40;
-  color:white;
+.secondary:hover{
+  transform:scale(1.05);
 }
 
-.result{
-  margin-top:20px;
-  text-align:center;
+.heart{
+  font-size:80px;
+  animation:beat 1s infinite;
 }
 
-.heart-container{
-  margin-top:20px;
-  animation:pulse 1.5s infinite;
+@keyframes beat{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.2);}
 }
 
-@keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.05);}
-  100%{transform:scale(1);}
-}
-
-.countdown{
-  margin-top:10px;
-  font-size:0.9rem;
-  opacity:0.8;
-}
-
-/* Responsive ajuste */
-@media (max-width:480px){
-  .book{
-    padding:20px;
-  }
-  img{
-    max-height:220px;
-  }
+/* Responsive */
+@media(max-width:600px){
+  h1{font-size:20px;}
+  p{font-size:16px;}
 }
 </style>
 </head>
+
 <body>
 
-<div class="book">
+<div class="container">
 
-<!-- Página 1 -->
-<div class="page active">
-  <h1>Para <span class="name">[SU NOMBRE]</span></h1>
-  <img src="padre.jpg">
+<!-- MOMENTO 1 -->
+<div class="section active">
+  <h1>Hoy Honramos Su Memoria</h1>
+  <img src="padre.jpg?v=1">
   <p>
-    Hoy honramos a tu papá.  
-    Él soñó con verte doctora…  
-    y hoy eres exactamente eso.  
-    Estoy seguro que donde esté, sonríe orgulloso.
+    Sé que hoy duele más…  
+    pero él soñó con verte doctora.  
+    Y mírate… lo lograste.  
+    Estoy seguro de que está orgulloso de ti.
   </p>
+  <div class="buttons">
+    <button class="primary" onclick="next()">Siguiente</button>
+  </div>
 </div>
 
-<!-- Página 2 -->
-<div class="page">
-  <h1>Tu camino</h1>
-  <img src="momento2.jpg">
+<!-- MOMENTO 2 -->
+<div class="section">
+  <h1>Tu Camino</h1>
+  <img src="momento2.jpg?v=1">
   <p>
     Aunque no hayas ido a Barcelona,  
-    tu grandeza no depende de una ciudad.  
-    Depende de tu corazón…  
-    y ese corazón es extraordinario.
+    tu destino no depende de un lugar…  
+    depende de tu fuerza.  
+    Y tú tienes más de la que imaginas.
   </p>
+  <div class="buttons">
+    <button class="primary" onclick="prev()">Atrás</button>
+    <button class="primary" onclick="next()">Siguiente</button>
+  </div>
 </div>
 
-<!-- Página 3 -->
-<div class="page">
-  <h1>Una última pregunta…</h1>
-  <p style="font-family:'Great Vibes'; font-size:clamp(1.5rem, 6vw, 2rem);">
-    ¿Quieres ser mi San Valentín? 💖
-  </p>
+<!-- MOMENTO 3 -->
+<div class="section">
+  <h1>¿Quieres ser mi San Valentín? 🤍</h1>
 
   <div class="buttons">
-    <button class="nav" onclick="yes()">Sí 🤍</button>
-    <button class="no" onclick="no()">No 🙃</button>
+    <button class="primary" onclick="yes()">Sí 🤍</button>
+    <button class="secondary" onclick="no()">No 🙃</button>
   </div>
 
-  <div class="countdown" id="countdown"></div>
-  <div class="result" id="result"></div>
-</div>
+  <div id="result" style="text-align:center;margin-top:25px;"></div>
 
-<div class="buttons">
-  <button class="nav" onclick="prev()">Atrás</button>
-  <button class="nav" onclick="next()">Siguiente</button>
+  <div class="buttons">
+    <button class="primary" onclick="prev()">Atrás</button>
+  </div>
 </div>
 
 </div>
-
-<audio id="music1" src="music1.mp3" loop></audio>
-<audio id="music2" src="music2.mp3" loop></audio>
 
 <script>
-const pages=document.querySelectorAll(".page");
 let current=0;
+let sections=document.querySelectorAll(".section");
 
-function showPage(i){
-  pages.forEach(p=>p.classList.remove("active"));
-  pages[i].classList.add("active");
+function show(i){
+  sections.forEach(s=>s.classList.remove("active"));
+  sections[i].classList.add("active");
+  window.scrollTo(0,0);
 }
 
 function next(){
-  if(current<pages.length-1){
+  if(current<sections.length-1){
     current++;
-    showPage(current);
+    show(current);
   }
 }
 
 function prev(){
   if(current>0){
     current--;
-    showPage(current);
+    show(current);
   }
 }
 
 function no(){
   document.getElementById("result").innerHTML=
-  "❌ Esa no es la respuesta correcta… tu corazón sabe cuál es 🤍";
+  "<p>❌ Esa no es la respuesta correcta... intenta otra vez 🤍</p>";
 }
 
 function yes(){
   document.getElementById("result").innerHTML=
-  `<div class="heart-container">
-      <img src="final.jpg" width="200">
-    </div>
-    <p style="font-family:'Great Vibes'; font-size:1.6rem;">
-    Sabía que dirías que sí 💘
-    </p>`;
+  "<div class='heart'>❤️</div><p>Sabía que dirías que sí 💘</p>";
 }
-
-/* Cuenta regresiva */
-function updateCountdown(){
-  const target=new Date("February 14, 2026 00:00:00");
-  const now=new Date();
-  const diff=target-now;
-  const days=Math.floor(diff/(1000*60*60*24));
-  document.getElementById("countdown").innerText=
-  "Faltan "+days+" días para San Valentín 🤍";
-}
-updateCountdown();
-
-showPage(0);
 </script>
 
 </body>
