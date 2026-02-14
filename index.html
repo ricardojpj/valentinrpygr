@@ -3,75 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Para Ti 🤍</title>
-
-<!-- 🔥 Anti-cache -->
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 
 <style>
 body{
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  background:linear-gradient(135deg,#2b1a1f,#3a1f2b,#1e1e26);
+  font-family:Arial, sans-serif;
+  background:#1a1a1a;
   color:white;
-  overflow-x:hidden;
+  padding:20px;
 }
 
 .container{
-  max-width:900px;
+  max-width:800px;
   margin:auto;
-  padding:20px;
 }
 
 .section{
   display:none;
-  animation:fade 0.6s ease-in-out;
 }
 
 .section.active{
   display:block;
 }
 
-@keyframes fade{
-  from{opacity:0; transform:translateY(10px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
 h1{
   font-size:24px;
-  text-align:center;
 }
 
 p{
-  font-size:18px;
-  line-height:1.7;
-  text-align:center;
+  font-size:16px;
+  line-height:1.6;
 }
 
 img{
   width:100%;
-  max-height:400px;
-  object-fit:cover;
-  border-radius:18px;
-  margin:20px 0;
-}
-
-.buttons{
-  text-align:center;
-  margin-top:25px;
+  border-radius:10px;
+  margin:15px 0;
 }
 
 button{
-  padding:12px 28px;
+  padding:10px 20px;
+  margin:10px 5px;
   border:none;
-  border-radius:30px;
-  font-size:16px;
-  margin:8px;
+  border-radius:20px;
   cursor:pointer;
-  transition:0.3s;
 }
 
 .primary{
@@ -79,93 +55,60 @@ button{
   color:black;
 }
 
-.primary:hover{
-  transform:scale(1.05);
-}
-
 .secondary{
   background:#7a2e40;
   color:white;
 }
 
-.secondary:hover{
-  transform:scale(1.05);
-}
-
-.heart{
-  font-size:80px;
-  animation:beat 1s infinite;
-}
-
-@keyframes beat{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.2);}
-}
-
-/* Responsive */
-@media(max-width:600px){
-  h1{font-size:20px;}
-  p{font-size:16px;}
+.center{
+  text-align:center;
 }
 </style>
 </head>
-
 <body>
 
 <div class="container">
 
-<!-- MOMENTO 1 -->
 <div class="section active">
-  <h1>Hoy Honramos Su Memoria</h1>
-  <img src="padre.jpg?v=1">
+  <h1>Para [SU NOMBRE]</h1>
+  <img src="padre.jpg">
   <p>
-    Sé que hoy duele más…  
-    pero él soñó con verte doctora.  
-    Y mírate… lo lograste.  
-    Estoy seguro de que está orgulloso de ti.
+    Hoy honramos la memoria de tu papá.  
+    Él soñó con verte doctora…  
+    y hoy eres exactamente eso.
   </p>
-  <div class="buttons">
-    <button class="primary" onclick="next()">Siguiente</button>
-  </div>
+  <button class="primary" onclick="next()">Siguiente</button>
 </div>
 
-<!-- MOMENTO 2 -->
 <div class="section">
-  <h1>Tu Camino</h1>
-  <img src="momento2.jpg?v=1">
+  <h1>Tu camino</h1>
+  <img src="momento2.jpg">
   <p>
     Aunque no hayas ido a Barcelona,  
-    tu destino no depende de un lugar…  
-    depende de tu fuerza.  
-    Y tú tienes más de la que imaginas.
+    tu grandeza no depende de una ciudad.
   </p>
-  <div class="buttons">
-    <button class="primary" onclick="prev()">Atrás</button>
-    <button class="primary" onclick="next()">Siguiente</button>
-  </div>
+  <button class="primary" onclick="prev()">Atrás</button>
+  <button class="primary" onclick="next()">Siguiente</button>
 </div>
 
-<!-- MOMENTO 3 -->
 <div class="section">
-  <h1>¿Quieres ser mi San Valentín? 🤍</h1>
+  <h1>¿Quieres ser mi San Valentín? 💖</h1>
 
-  <div class="buttons">
+  <div class="center">
     <button class="primary" onclick="yes()">Sí 🤍</button>
     <button class="secondary" onclick="no()">No 🙃</button>
   </div>
 
-  <div id="result" style="text-align:center;margin-top:25px;"></div>
+  <div id="result" class="center"></div>
 
-  <div class="buttons">
-    <button class="primary" onclick="prev()">Atrás</button>
-  </div>
+  <button class="primary" onclick="prev()">Atrás</button>
 </div>
 
 </div>
 
 <script>
 let current=0;
-let sections=document.querySelectorAll(".section");
+const sections=document.querySelectorAll(".section");
 
 function show(i){
   sections.forEach(s=>s.classList.remove("active"));
@@ -189,12 +132,12 @@ function prev(){
 
 function no(){
   document.getElementById("result").innerHTML=
-  "<p>❌ Esa no es la respuesta correcta... intenta otra vez 🤍</p>";
+  "<p>❌ Esa no es la respuesta correcta 🤍</p>";
 }
 
 function yes(){
   document.getElementById("result").innerHTML=
-  "<div class='heart'>❤️</div><p>Sabía que dirías que sí 💘</p>";
+  "<img src='final.jpg' style='width:200px;border-radius:10px;'><p>Sabía que dirías que sí 💘</p>";
 }
 </script>
 
