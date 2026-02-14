@@ -122,7 +122,7 @@ button{
     pensando únicamente en ti.
   </p>
   <p>
-    No busco impresionarte…  
+    No busco lastimarte…  
     solo quiero verte feliz. 🤍
   </p>
 </div>
@@ -181,17 +181,20 @@ button{
 <script>
 const pages = document.querySelectorAll(".page");
 let current = 0;
+let musicStarted = false;
 const music1 = document.getElementById("music1");
-
-window.addEventListener("load", () => {
-  music1.volume = 1;
-  music1.play().catch(() => {});
-});
 
 function showPage(i){
   pages.forEach(p=>p.classList.remove("active"));
   pages[i].classList.add("active");
   window.scrollTo(0,0);
+
+  // 🎵 Iniciar música cuando llegue a Página 1
+  if(i === 1 && !musicStarted){
+    music1.volume = 1;
+    music1.play().catch(()=>{});
+    musicStarted = true;
+  }
 }
 
 function next(){
